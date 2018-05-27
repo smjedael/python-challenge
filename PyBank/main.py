@@ -5,45 +5,54 @@ import csv
 #Request path and filename of data file
 csvpath = input('Please enter path and filename of data file (e.g. "datafolder/datafile.csv"): ')
 
+#Declare and initialize variables to store data
+total_revenue = 0
+prev_revenue = 0
+sum_revenue_chg = 0
+max_revenue_chg = 0
+max_revenue_dt = ""                           #Date of max revenue increase
+min_revenue_chg = 0
+min_revenue_dt = ""                           #Date of max revenue decrease
+revenue_chg = []                              #List to store revenue change values
+
 #Open CSV file and perform operations
 with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    header = next(csvreader)
-    
-    #Declare and initialize variables to store data
-    total_revenue = 0
-    prev_revenue = 0
-    sum_revenue_chg = 0
-    max_revenue_chg = 0
-    max_revenue_dt = ""                           #Date of max revenue increase
-    min_revenue_chg = 0
-    min_revenue_dt = ""                           #Date of max revenue decrease
-    revenue_chg = []                              #List to store revenue change values
+    header = next(csvreader)    
     
     for row in csvreader:
-        total_revenue = total_revenue + int(row[1])          #Add revenue value to cumulative total
+
+        #Add revenue value to cumulative total
+        total_revenue = total_revenue + int(row[1])          
         
+        #Calculate current change in revenue
         cur_revenue_chg = int(row[1]) - prev_revenue
         
-        if cur_revenue_chg > max_revenue_chg:                #Update max revenue increase
+        #Update max revenue increase
+        if cur_revenue_chg > max_revenue_chg:                
             max_revenue_chg = cur_revenue_chg
             max_revenue_dt = row[0]
         
-        if cur_revenue_chg < min_revenue_chg:                #Update min revenue increase
+        #Update min revenue increase
+        if cur_revenue_chg < min_revenue_chg:                
             min_revenue_chg = cur_revenue_chg
             min_revenue_dt = row[0]
-            
-        revenue_chg.append(cur_revenue_chg)                  #Store revenue change
+
+        #Store revenue change
+        revenue_chg.append(cur_revenue_chg)                  
         
-        prev_revenue = int(row[1])                           #Set prior revenue to current revenue value
+        #Set prior revenue to current revenue value
+        prev_revenue = int(row[1])                           
         
     
     total_months = len(revenue_chg)
-    
-    for x in range(1, total_months):                         #Ignore revenue change of first entry
+
+    #Ignore revenue change of first entry
+    for x in range(1, total_months):                         
         sum_revenue_chg = sum_revenue_chg + revenue_chg[x]
    
-    avg_revenue_chg = round(sum_revenue_chg/(total_months - 1), 2)     #Calculate avg revenue change, ignoring first entry
+    #Calculate avg revenue change, ignoring first entry
+    avg_revenue_chg = round(sum_revenue_chg/(total_months - 1), 2)     
     
 #Create Budget Summary
 budget_summary = [f'Financial Analysis',

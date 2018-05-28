@@ -56,13 +56,15 @@ with open(csvpath, newline="") as csvfile:
     avg_revenue_chg = round(sum_revenue_chg/(total_months - 1), 2)     
     
 #Create Budget Summary
-budget_summary = [f'Financial Analysis',
+budget_summary = [f'',
+                  f'Financial Analysis',
                   f'-----------------------------------',
                   f'Total Months: {total_months}',
                   f'Total Revenue: ${total_revenue}',
                   f'Average Revenue Change: ${avg_revenue_chg}',
                   f'Greatest Increase in Revenue: {max_revenue_dt} (${max_revenue_chg})',
-                  f'Greatest Decrease in Revenue: {min_revenue_dt} (${min_revenue_chg})'
+                  f'Greatest Decrease in Revenue: {min_revenue_dt} (${min_revenue_chg})',
+                  f''
                  ]
 
 #Print Budget Summary in terminal

@@ -42,7 +42,8 @@ for candidate in candidate_list:
 winner = candidate_list[candidate_votes.index(win_votes)]
 
 #Create Election Results table
-election_header = [f'Election Results',
+election_header = [f'',
+                   f'Election Results',
                    f'-----------------------------------',
                    f'Total Votes: {len(total_votes)}',
                    f'-----------------------------------'
@@ -53,7 +54,8 @@ for candidate in candidate_list:
 
 election_footer = [f'-----------------------------------',
                    f'Winner: {winner}',
-                   f'-----------------------------------'
+                   f'-----------------------------------',
+                   f''
                   ]
 election_summary = election_header + election_results + election_footer
 
